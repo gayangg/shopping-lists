@@ -1,0 +1,44 @@
+<% layout("./layouts/layout.eta") %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="/lists">Shopping lists</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<h1><%= it.list.name %></h1>
+
+<h2>Add item to <%= it.list.name %></h2>
+
+<form action="/lists/<%= it.list.id %>/items" method="POST">
+  <input type="text" name="name" />
+  <input type="submit" value="Add Item" />
+</form>
+<div>&nbsp;</div>
+<div class="col-6">
+  <div>
+    <ul class="list-group">
+    <% if (it.items) { %>
+      <% it.items.forEach((item) => { %>
+        <li>
+          <form action="/lists/<%= item.shopping_list_id %>/items/<%= item.id %>/collect" method="POST">
+            <%= item.name %>
+            <input type="submit" value="Mark collected" />
+          </form>
+        </li>
+      <% }) %>
+    <% } %>
+    <% if (it.itemsCollected) { %>
+      <% it.itemsCollected.forEach((item) => { %>
+        <li ><del>
+            <%= item.name %>
+        </del></li>
+      <% }) %>
+    <% } %>
+    </ul>
+  </div>
+</div>

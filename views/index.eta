@@ -1,0 +1,27 @@
+<% layout("./layouts/layout.eta") %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="/lists">List</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<h2>Shared shopping lists</h2>
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+    <% if (it.listsCount !== 0) { %>
+        <h4>Statistic:</h4>
+        <ul>
+            <li>Shopping lists: <span class="badge badge-secondary"><%= it.listsCount %></span></li>
+            <li>Shopping list entry: <span class="badge badge-secondary"><%= it.itemsCount %></span></li>
+        </ul>
+
+    <% } else { %>
+            <li class="list-group-item">
+            <p class="alert alert-secondary" role="alert">No shopping lists yet.</p>
+          </li>
+    <% } %>
+</div>

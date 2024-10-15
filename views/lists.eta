@@ -1,0 +1,45 @@
+<% layout("./layouts/layout.eta") %>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a href="/">Main page</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="col-6">
+
+  <form action="/lists" method="POST" class="form-add ">
+    <h4>Add category to shopping list</h4>
+    <div class="form-group">
+        <b>Name: </b><input type="text" name="name" /> 
+        <input type="submit" value="Create List" />
+    </div>
+  </form>
+
+  <div>
+    <ul class="list-group">
+      <% if (Number(it.lists) !== 0) { %>
+      
+      <h4>Shopping list</h4>
+      <% it.lists.forEach((e) => { %>
+          <li class="list-group-item d-flex justify-content-between">
+            <a href="/lists/<%= e.id %>" ><%= e.name %></a>
+            <span class="badge">
+              <form action="/lists/<%= e.id %>/deactivate" method="POST">
+                <input type="submit" value="Deactivate list" class="btn btn-secondary btn-sm" />
+              </form>
+            </span>
+          </li>
+      <% }); %>
+      <% } else { %>
+          <li class="list-group-item">
+            <p class="alert alert-secondary" role="alert">No active list.</p>
+          </li>
+      <% } %>
+    </ul>
+  </div>
+</div>
