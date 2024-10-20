@@ -1,4 +1,5 @@
-import {postgres} from "../deps.js";
+import "https://deno.land/x/dotenv/load.ts";
+import { postgres } from "../deps.js";
 
 let sql;
 if (Deno.env.get("DATABASE_URL")) {

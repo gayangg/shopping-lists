@@ -7,10 +7,13 @@ const responseDetails = {
     headers: { "Content-Type": "text/html;charset=UTF-8" },
 };
 
-const addToList = async (request) => {
+const createList = async (request) => {
     const formData = await request.formData()
     const name = formData.get("name")
-    await listService.createList(name)
+    console.log("NAME:", typeof name);
+
+    if(name.trim() !=="")
+        await listService.createList(name)
 
     return requestUtils.redirectTo("/lists")
 }
@@ -25,9 +28,9 @@ const viewList = async (request) => {
         items : await itemsService.getItemByListId(id),
         itemsCollected : await itemsService.getCollectedItemByListId(id)
     }
-  console.log("LIST:", data.list);
-  console.log("ITEMS:", data.items);
-  console.log("ITEMS-COLLECTED:", data.items_collected);
+    console.log("LIST:", data.list);
+    console.log("ITEMS:", data.items);
+    console.log("ITEMS-COLLECTED:", data.items_collected);
     return new Response(await renderFile("list.eta", data), responseDetails);
 }
 
@@ -35,11 +38,11 @@ const viewLists = async (request) => {
     const data = {
         lists: await listService.getAllLists(),
   }
-    console.log("LISTS:", data.lists);
+
     return new Response(await renderFile("lists.eta", data), responseDetails);
 }
 
-const updateLists = async (request) => {
+const updateList = async (request) => {
     const url = new URL(request.url);
     const urlParts = url.pathname.split("/");
     let id = urlParts[2]
@@ -49,4 +52,4 @@ const updateLists = async (request) => {
     return requestUtils.redirectTo("/lists")
 }
 
-export {addToList, viewList, viewLists, updateLists }
+export {createList, viewList, viewLists, updateList }

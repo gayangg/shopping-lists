@@ -23,8 +23,8 @@
   <div>
     <ul class="list-group">
       <% if (Number(it.lists) !== 0) { %>
-      
       <h4>Shopping list</h4>
+      
       <% it.lists.forEach((e) => { %>
           <li class="list-group-item d-flex justify-content-between">
             <a href="/lists/<%= e.id %>" ><%= e.name %></a>

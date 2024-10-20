@@ -2,7 +2,7 @@
 
 Shopping list build using Deno, Js and PostgreSQL.
 The API allows users to perform CRUD operations on shopping list. 
-  
+live url : https://shopping-lists-7kqg.onrender.com
 
 ## Technologies
 - Deno serve

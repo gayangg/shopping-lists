@@ -6,14 +6,6 @@ const createItem = async (id, name) => {
     VALUES (${id}, ${name})`;
 }
 
-const getItemNum = async (id) => {
-  let result = await sql`
-    SELECT COUNT(id)
-    FROM shopping_list_items`;
-  
-  return result.rows[0].count
-}
-
 const getItemByListId = async (id) => {
   let result = await sql`
     SELECT * FROM shopping_list_items
@@ -34,18 +26,11 @@ const getCollectedItemByListId = async (id) => {
   return result;
 }
 
-const updateItemById = async (item_id) => {
+const updateItemById = async (itemId) => {
   await sql`
     UPDATE shopping_list_items 
     SET collected=TRUE
-    WHERE id=${item_id}`;
-}
-
-const updateItemByListId = async (shopping_list_id) => {
-  await sql`
-    UPDATE shopping_list_items 
-    SET collected=TRUE
-    WHERE shopping_list_id=${list_id}`;
+    WHERE id=${itemId}`;
 }
 
 const getItemsCount = async () => {
@@ -58,10 +43,8 @@ const getItemsCount = async () => {
 
 export {
   createItem,
-  getItemNum,
   getItemByListId,
   getCollectedItemByListId,
   getItemsCount,
-  updateItemById,
-  updateItemByListId
+  updateItemById
 }

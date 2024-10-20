@@ -10,35 +10,46 @@
     </div>
   </nav>
 
-<h1><%= it.list.name %></h1>
 
-<h2>Add item to <%= it.list.name %></h2>
-
-<form action="/lists/<%= it.list.id %>/items" method="POST">
-  <input type="text" name="name" />
-  <input type="submit" value="Add Item" />
-</form>
-<div>&nbsp;</div>
 <div class="col-6">
+  <% it.list.forEach((item) => { %>
+    <h1><%= item.name %></h1>
+    
+
+
+  <form action="/lists/<%= item.id %>/items" method="POST"  class="form-add">
+  <h3>Add item to <%= item.name %></h3>
+    <input type="text" name="name" />
+    <input type="submit" value="Add Item" />
+  </form>
+  <% }) %>
+</div>
+
+<div class="col-6">
+
   <div>
     <ul class="list-group">
-    <% if (it.items) { %>
-      <% it.items.forEach((item) => { %>
-        <li>
-          <form action="/lists/<%= item.shopping_list_id %>/items/<%= item.id %>/collect" method="POST">
-            <%= item.name %>
-            <input type="submit" value="Mark collected" />
-          </form>
-        </li>
-      <% }) %>
-    <% } %>
-    <% if (it.itemsCollected) { %>
-      <% it.itemsCollected.forEach((item) => { %>
-        <li ><del>
-            <%= item.name %>
-        </del></li>
-      <% }) %>
-    <% } %>
+      <% if (it.items) { %>
+        <% it.items.forEach((item) => { %>
+          <li class="list-group-item d-flex justify-content-between">
+            <a><%= item.name %></a>
+            <span class="badge">
+              <form action="/lists/<%= item.shopping_list_id %>/items/<%= item.id %>/collect" method="POST">
+                <input type="submit" value="Mark collected" class="btn btn-secondary btn-sm" />
+              </form>
+            </span>
+          </li>
+        <% }) %>
+      <% } %>
+      <% if (it.itemsCollected) { %>
+        <% it.itemsCollected.forEach((item) => { %>
+          <li class="list-group-item d-flex justify-content-between">
+            <del>
+                <%= item.name %>
+            </del>
+          </li>
+        <% }) %>
+      <% } %>
     </ul>
   </div>
 </div>

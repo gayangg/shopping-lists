@@ -22,27 +22,23 @@ const handleRequest = async (request) => {
     return await listController.viewLists(request);
 
   } else if (path === "/lists" && queryType === "POST") {
-    return await listController.addToList(request);
+    return await listController.createList(request);
 
   } else if (path.match("/lists/[0-9]+") && queryType === "GET") {
     return await listController.viewList(request);
 
-  } else if (path.match("/lists/[0-9]+/items") && queryType === "POST") {
-    console.log("EEE");
-    return await itemController.createItem(request);
-
   } else if (path.match("/lists/[0-9]+/deactivate") && queryType === "POST") {
-    return await listController.updateLists(request);
+    return await listController.updateList(request);
 
   } else if (path.match("/lists/[0-9]+/items/[0-9]+/collect") && queryType === "POST") {
-    console.log("GGG");
     return await itemController.updateItem(request);
 
-  }  else {
+  } else if (path.match("/lists/[0-9]/items") && queryType === "POST") {
+    return await itemController.createItem(request);
+
+  } else {
     return new Response("Not found", { status: 404 });
   }
 };
-
-
 
 serve(handleRequest, { port :7777});

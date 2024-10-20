@@ -9,6 +9,7 @@ services:
       - 7777:7777
     depends_on:
       - "database"
+      - flyway
     env_file:
       - .env
       
@@ -20,6 +21,8 @@ services:
       - POSTGRES_USER=username
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=database
+    env_file:
+      - .env
   flyway:
     image: flyway/flyway:7.3.0-alpine
     environment:

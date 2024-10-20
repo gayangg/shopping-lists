@@ -55,7 +55,7 @@ const getById = async (id) => {
     console.log("RESULT: getById", result.length);
 
     if (result && result.length > 0) {
-      return result;//.rows[1];
+      return result;
     }
     return { id: 0, name: "List Does NOT Exists!" };
   } catch (error) {
